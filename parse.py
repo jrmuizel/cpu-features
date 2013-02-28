@@ -33,7 +33,9 @@ def has_sse2(vendor, family, model, stepping):
 breakdown = {}
 reader = csv.reader(sys.stdin, delimiter='\t')
 for row in reader:
-    if row[6] != "Firefox" or (row[7] != "17.0.1" and row[7] != "18.0" and row[7] != "19.0" and row[7] != "20.0"):
+    if row[6] != "Firefox":
+        pass
+    if row[7] != "17.0.1" and row[7] != "18.0" and row[7] != "19.0" and row[7] != "20.0" and row[7] != "21.0" and row[7] != "22.0":
         #print row[6], row[7]
         pass
         #continue
@@ -132,8 +134,9 @@ for i in sorted([(i[1], i[0]) for i in breakdown.items()], reverse=True):
     print i[1], 100.*breakdown[i[1]]/(total), describe(i[1][0], i[1][1], i[1][2])
 print "sse2", "%s%%" % (sse2*100./total)
 print "amd", "%s%%" % (amd*100./total)
-print "coreavg", 1.*core_sum/total, core_max
+print "coreavg", 1.*core_sum/total
+print "coremax", core_max
 print "mulicore", "%s%%" % (multicore*100./total)
 print "windowsxp", "%s%%" % (windowsxp*100./total)
-print "windowsxp",  (windowsxp, total)
+#print "windowsxp",  (windowsxp, total)
 print "fourcore", "%s%%" % (fourcore*100./total)
